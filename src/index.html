@@ -52,62 +52,36 @@
   <!-- Page Content -->
   <section>
     <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <h1 class="mt-5">Welcome to Habit Tracker!</h1>
-          <p>Use the calender below to track your habits. This application serves as a tool to visually document your habits in an effort to be more mindful and diligent in keeping up with your goals of becoming the better you.</p>
-        </div>
-      </div>
+      <h1 class="mt-5">Welcome to Habit Tracker!</h1>
+      <p>Use the calender below to track your habits. This application serves as a tool to visually document your habits in an effort to be more mindful and diligent in keeping up with your goals of becoming the better you.</p>
+
       <!-- Calendar -->
-      <div class="row">
-        <div class="col-lg-12">
-
-          <!-- header displays month and current date + prev/next links -->
-          <div class="month">
-            <div class="row">
-              <div class="col"><span class="calendar-nav prev">&#10094</span></div>
-              <div>
-                <div class="col"><h4>September</h4>
-                <h5>2019</h5></div>
-              </div>
-              <div class="col"><span class="calendar-nav next">&#10095</span></div>
-            </div>
-          </div>
-
-          <!-- days of the week -->
-          <div class="row weekdays">
-            <div class="col">Mon</div>
-            <div class="col">Tue</div>
-            <div class="col">Wed</div>
-            <div class="col">Thu</div>
-            <div class="col">Fri</div>
-            <div class="col">Sat</div>
-            <div class="col">Sun</div>
-          </div>
-
-          <!-- days of the month -->
-          <div class="days">
-            <div class="row">
-              <div class="col">1</div>
-              <div class="col">1</div>
-              <div class="col">1</div>
-              <div class="col">1</div>
-              <div class="col">1</div>
-              <div class="col">1</div>
-              <div class="col">1</div>
-            </div>
-            <div class="row">
-              <div class="col">2</div>
-              <div class="col">2</div>
-              <div class="col">2</div>
-              <div class="col">2</div>
-              <div class="col">2</div>
-              <div class="col">2</div>
-              <div class="col">2</div>
-            </div>
-          </div>
+      <!-- header displays month and current date + prev/next links -->
+      <div class="month rounded-top">
+        <div class="row">
+          <div class="col"><span class="calendar-nav prev">&#10094</span></div>
+          <div class="col"><h4 id="calendar-month"></h4>
+          <p id="calendar-full-date"></p></div>
+          <div class="col"><span class="calendar-nav next">&#10095</span></div>
         </div>
       </div>
+
+      <table class="table table-responsive-sm" id="calendar">
+        <!-- days of the week -->
+          <thead>
+            <tr class="weekdays">
+              <th>Sun</th>
+              <th>Mon</th>
+              <th>Tue</th>
+              <th>Wed</th>
+              <th>Thu</th>
+              <th>Fri</th>
+              <th>Sat</th>
+            </tr>
+          </thead>
+          <!-- cells of calendar body-->
+          <tbody class="days" id="calendar-body"></tbody>
+      </table>
     </div>
   </section>
 
@@ -115,7 +89,6 @@
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="js/app.js"></script>
-
+  
 </body>
-
 </html>
