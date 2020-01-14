@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Calendar</title>
+  <style>
+    td:hover {
+      transition: all 0.2s;
+      background-color: #ddd;
+      cursor: pointer;
+    }
+
+    .header {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .calendar-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 23px;
+      width: 50px;
+      height: 50px;
+    }
+
+    .prev {
+      float: left;
+    }
+
+    .next {
+      float: right;
+    }
+
+    #calendar-month {
+      font-size: 32px;
+      letter-spacing: .20rem;
+      margin-bottom: 0px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Calendar -->
+  <div class="container">
+    <div class="header">
+      <span class="calendar-nav prev">&#10094</span><span id="calendar-month"></span><span
+        class="calendar-nav next">&#10095</span>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Sun</th>
+          <th>Mon</th>
+          <th>Tue</th>
+          <th>Wed</th>
+          <th>Thu</th>
+          <th>Fri</th>
+          <th>Sat</th>
+        </tr>
+      </thead>
+      <!-- days in the calendar month -->
+      <tbody id="calendar-body"></tbody>
+    </table>
+  </div>
+
+</body>
+<script>
+  let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+  const d = new Date();
+  let currentYear = d.getFullYear();
+  let currentMonth = d.getMonth();
+
+  buildCalendar(currentMonth, currentYear);
+
+  let prevButton = document.querySelector(".prev")
+  let nextButton = document.querySelector(".next")
+
+  prevButton.addEventListener("click", function () {
+    currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
+    currentMonth = (currentMonth === 0) ? 11 : currentMonth - 1;
+    buildCalendar(currentMonth, currentYear);
+  });
+
+  nextButton.addEventListener("click", function () {
+    currentYear = (currentMonth === 11) ? currentYear + 1 : currentYear;
+    currentMonth = (currentMonth + 1) % 12;
+    buildCalendar(currentMonth, currentYear);
+  });
+
+  // builds out calendar table and populates with correct number of days 
+  function buildCalendar(month, year) {
+
+    // populate calendar header (month)
+    document.querySelector("#calendar-month").textContent = months[month];
+
+    let firstDay = (new Date(year, month)).getDay();
+    let daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    let table = document.querySelector("#calendar-body");
+    table.innerHTML = ""; // clear cells
+
+    // create all cells
+    let date = 1;
+    for (let i = 0; i < 6; i++) {
+      // adds up to six table rows
+      let row = document.createElement("tr");
+      for (let j = 0; j < 7; j++) {
+        // empty cells before month starts
+        if (i === 0 && j < firstDay) {
+          let cell = document.createElement("td");
+          let cellText = document.createTextNode("");
+          cell.appendChild(cellText);
+          row.appendChild(cell);
+        }
+        else if (date > daysInMonth) {
+          break;
+        }
+        else {
+          let cell = document.createElement("td");
+          let cellText = document.createTextNode(date);
+          cell.appendChild(cellText);
+          row.appendChild(cell);
+          date++;
+        }
+      }
+      table.appendChild(row);
+    }
+  }
+</script>
+
+</html>
